@@ -3,6 +3,8 @@ function Demo01(app) {
     /*html*/
     template: `
     <div>
+      <h1>Component Demo01</h1>
+      <br>
       Count(Demo01): {{ dataCount }}
       <br>
       <button type="button" 

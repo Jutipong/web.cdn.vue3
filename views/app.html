@@ -194,12 +194,11 @@
           <div class="page-inner">
             <div class="row">
               <div id="app">
-                <h2>App Component</h2>
-                <app-component></app-component>
-
-                <br />
-                <h2>Demo01 Component</h2>
-                <demo01-component></demo01-component>
+                <!-- Content -->
+                <div id="includedContent">
+                  <app-component></app-component>
+                </div>
+                <!-- End Content -->
               </div>
             </div>
           </div>
@@ -234,6 +233,7 @@
     <script src="../assets/js/main.js"></script>
     <script src="../components/app.js"></script>
     <script src="../components/demo01.js"></script>
+    <script src="../components/demo02.js"></script>
 
     <script>
       $("#displayNotif").on("click", function () {
@@ -267,7 +267,9 @@
       const app = CreateApp();
       App(app);
       Demo01(app);
+      Demo02(app);
       Mount(app);
+
     </script>
   </body>
 </html>

@@ -1,18 +1,23 @@
+const _html = /*html*/ `
+    <div>
+        <h1>App Component</h1>
+        Count: {{ dataCount }}
+        <hr>
+        <demo01-component></demo01-component>
+        <hr>
+        <demo02-component></demo02-component>
+        <hr>
+    </div>
+`;
+
 function App(app) {
   app.component("app-component", {
-    /*html*/
-    template: `
-    <div>
-      Count (App): {{ dataCount }}
-      <br>
-      <button type="button" v-on:click="increase()">Count++</button>
-    </div> 
-    `,
+    template: _html,
     setup() {
       const { computed } = Vue;
       const dataCount = computed(() => store.count);
-      const increase = () => store.count++;
-      return { dataCount, increase };
+
+      return { dataCount };
     },
   });
 }
