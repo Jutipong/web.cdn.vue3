@@ -1,4 +1,4 @@
-function Demo01(app) {
+function Demo01Component(app) {
   app.component("demo01-component", {
     /*html*/
     template: `
@@ -15,8 +15,8 @@ function Demo01(app) {
     `,
     setup() {
       const { computed } = Vue;
-      const dataCount = computed(() => store.count);
-      const decrease = () => store.count--;
+      const dataCount = computed(() => _storeDemo.count);
+      const decrease = () => _storeDemo.count--;
       return { dataCount, decrease };
     },
   });

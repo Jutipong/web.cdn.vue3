@@ -1,9 +1,5 @@
 function CreateApp() {
-  const app = Vue.createApp({
-    data() {
-      return { count: 0 };
-    },
-  });
+  const app = Vue.createApp({});
   return app;
 }
 function Mount(app) {

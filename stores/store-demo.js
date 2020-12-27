@@ -1,2 +1,2 @@
 const { reactive } = Vue;
-const store = reactive({ count: 1 });
+const _storeDemo = reactive({ count: 1 });

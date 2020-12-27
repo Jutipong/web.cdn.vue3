@@ -15,8 +15,7 @@ function App(app) {
     template: _html,
     setup() {
       const { computed } = Vue;
-      const dataCount = computed(() => store.count);
-
+      const dataCount = computed(() => _storeDemo.count);
       return { dataCount };
     },
   });
