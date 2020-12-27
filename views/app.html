@@ -240,44 +240,31 @@
     <!-- Load Script  -->
     <!-- Page AppDemo -->
     <script src="../components/demo/app.js"></script>
-    <script src="../components/demo/demo01.js"></script>
-    <script src="../components/demo/demo02.js"></script>
 
-    <script>
-      // $("#displayNotif").on("click", function () {
-      //   var placementFrom = $("#notify_placement_from option:selected").val();
-      //   var placementAlign = $("#notify_placement_align option:selected").val();
-      //   var state = $("#notify_state option:selected").val();
-      //   var style = $("#notify_style option:selected").val();
-      //   var content = {};
+    <script type="text/javascript">
+      const LoadJs = () => {
+        let scripts = jsList() || [];
+        if (!scripts.length)
+          return Promise.reject("ไม่พบ config load component *.js");
 
-      //   content.message =
-      //     'Turning standard Bootstrap alerts into "notify" like notifications';
-      //   content.title = "Bootstrap notify";
-      //   if (style == "withicon") {
-      //     content.icon = "fa fa-bell";
-      //   } else {
-      //     content.icon = "none";
-      //   }
-      //   content.url = "index.html";
-      //   content.target = "_blank";
-
-      //   $.notify(content, {
-      //     type: state,
-      //     placement: {
-      //       from: placementFrom,
-      //       align: placementAlign,
-      //     },
-      //     time: 1000,
-      //   });
-      // });
-
-      //Create Vue
-      //Register Component
-      var app = CreateApp();
-      if (PreLoadComponents(appID, app)) {
-        Mount(app);
-      }
+        var prArr = [];
+        scripts.forEach((script) => {
+          ((script) => {
+            prArr.push(
+              new Promise((resolve) => $.getScript(script, () => resolve()))
+            );
+          })(script);
+        });
+        return Promise.all(prArr, () => true);
+      };
+      LoadJs().then((res) => {
+        if (res.length) {
+          var app = CreateApp();
+          if (PreLoadComponents(appID, app)) {
+            Mount(app);
+          }
+        }
+      });
     </script>
   </body>
 </html>

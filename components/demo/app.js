@@ -20,3 +20,7 @@ function App(app) {
     },
   });
 }
+
+function jsList() {
+  return ["../components/demo/demo01.js", "../components/demo/demo02.js"];
+}
