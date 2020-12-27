@@ -1,1 +1,1 @@
-web.cdn.vue3
+source template => https://usebootstrap.com/preview/atlantis-lite
