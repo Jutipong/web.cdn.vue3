@@ -19,8 +19,14 @@ function App(app) {
       return { dataCount };
     },
   });
+  Demo01Component(app);
+  Demo02Component(app);
 }
 
-function jsList() {
-  return ["../components/demo/demo01.js", "../components/demo/demo02.js"];
+function JsComponents() {
+  return [
+    '../stores/store-demo.js?appid=1"',
+    "../components/demo/demo01.js",
+    "../components/demo/demo02.js",
+  ];
 }

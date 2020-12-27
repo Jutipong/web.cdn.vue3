@@ -13,7 +13,8 @@
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
       // Page AppID
-      var appID = new URL(window.location).searchParams.get("appid") || 0;
+      var appID =
+        parseInt(new URL(window.location).searchParams.get("appid")) || 1;
       console.log("Page AppID: ", appID);
 
       WebFont.load({
@@ -233,19 +234,50 @@
     <script src="../../assets/js/setting-demo2.js"></script>
 
     <script src="https://unpkg.com/vue@next"></script>
-    <script src="../components/preload-component.js"></script>
-    <script src="../stores/store-demo.js"></script>
+    <!-- <script src="../stores/store-demo.js"></script> -->
     <script src="../assets/js/main.js"></script>
 
-    <!-- Load Script  -->
-    <!-- Page AppDemo -->
-    <script src="../components/demo/app.js"></script>
-
     <script type="text/javascript">
-      const LoadJs = () => {
-        let scripts = jsList() || [];
+      // Load js for main page
+      switch (appID) {
+        case 1:
+          LoadComponentRoot("../components/demo/app.js");
+          break;
+        default:
+          console.warn("ไม่พบ appID สำหรับโหลด Root Component");
+          break;
+      }
+
+      //1.Load Root compnent
+      function LoadComponentRoot(url) {
+        $.getScript(url).done(function (res) {
+          if (!res) {
+            console.log("ไม่พบ config load root component .js");
+          } else {
+            //2.Load child component
+            LoadComponents().then((res) => {
+              if (res.length) {
+                var app = CreateApp();
+                switch (appID) {
+                  case 1:
+                    App(app);
+                    break;
+                  default:
+                    console.warn("ไม่พบ appID สำหรับโหลด Component");
+                    break;
+                }
+                Mount(app);
+              }
+            });
+          }
+        });
+      }
+
+      //Load js for child component
+      function LoadComponents() {
+        let scripts = JsComponents() || [];
         if (!scripts.length)
-          return Promise.reject("ไม่พบ config load component *.js");
+          return Promise.reject("ไม่พบ config load component .js");
 
         var prArr = [];
         scripts.forEach((script) => {
@@ -256,15 +288,7 @@
           })(script);
         });
         return Promise.all(prArr, () => true);
-      };
-      LoadJs().then((res) => {
-        if (res.length) {
-          var app = CreateApp();
-          if (PreLoadComponents(appID, app)) {
-            Mount(app);
-          }
-        }
-      });
+      }
     </script>
   </body>
 </html>
