@@ -1,5 +1,4 @@
 const PreLoadComponents = (appID, app) => {
-  debugger;
   switch (parseInt(appID)) {
     case 1:
       App(app);
